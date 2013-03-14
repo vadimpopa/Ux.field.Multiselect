@@ -220,11 +220,13 @@ Ext.define('Ux.field.Multiselect', {
 
             if (!listPanel.getParent()) {
                 Ext.Viewport.add(listPanel);
+            }
 
-                if(value){
-                    records = me.getRecordsFromValue(value);
-                    list.select(records, null, true);
-                }
+            if(value){
+                records = me.getRecordsFromValue(value);
+                list.select(records, null, true);
+            }else{
+                list.deselectAll();
             }
 
             listPanel.showBy(me.getComponent(), (Ext.os.is.BlackBerry && Ext.os.version.getMajor() === 10) ? 't-b' : null);
