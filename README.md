@@ -3,8 +3,9 @@ Ux.field.Multiselect
 
 Multiselect field for Sencha Touch 2.1.
 
-Works as a single or multi select field. Extends Ext.field.Select but also you can easyly take the missing code from Ext.field.Select
-and create an independent Ux.field.Multiselect widget which will extend from Ext.field.Text.
+As I didn't like available extensions, I've extended Ext.field.Select widget and added the multiselect feature.  Works as a single or multi select field. So far only for tablets screens. 
+
+It can easily extend Ext.field.Text if to take the missing code from Ext.field.Select and add it to Ux.field.Multiselect.
 
 Usage
 ```javascript
