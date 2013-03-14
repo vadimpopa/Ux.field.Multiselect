@@ -19,6 +19,7 @@ Ext.create('Ext.form.Panel', {
                 {
                     xtype: 'selectfield',
                     label: 'Choose one',
+                    delimiter: '/', //default is ','
                     mode: 'SINGLE', // default is MULTI
                     options: [
                         {text: 'First Option',  value: 'first'},
