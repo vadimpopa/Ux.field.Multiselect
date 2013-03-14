@@ -157,20 +157,24 @@ Ext.define('Ux.field.Multiselect', {
                     rec = all[j];   
                     if (rec.get(valueField) == value[i]) {
                         records.push(rec);
+                        break;
                     }
-                    break;
                 }   
             }
         }
         return records;
     },
     /**
-     * Returns the current selected {@link Ext.data.Model record} instance selected in this field.
-     * @return {Ext.data.Model} the record.
+     * Returns the current selected {@link Ext.data.Model records} instances selected in this field.
+     * @return {Ext.data.Model[]} An array of Records.
      */
     getSelection: function() {
         return this.listPanel.down('list').getSelection();
     },
+    /**
+     * Returns the current selected records as an array of their valueFields.
+     * @return {Array} An array of valueFields
+     */
     getValue: function() {
         return this._value;
     },
