@@ -71,6 +71,7 @@ Ext.define('Ux.field.Multiselect', {
      * @private
      */
     applyValue: function(value) {
+        this.getOptions();
         return  this.getValueFromRecords(value,this.getValueField());
     },
     /**
