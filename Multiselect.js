@@ -207,35 +207,23 @@ Ext.define('Ux.field.Multiselect', {
 
         me.isFocused = true;
 
-        if (me.getUsePicker()) {
-            var picker = me.getPhonePicker(),
-                value  = {};
+        var listPanel = me.getTabletPicker(),
+            list = listPanel.down('list'),
+            index, records,
+            value = me.getValue();
 
-            value[me.getName()] = me.getValue();
-            picker.setValue(value);
-            if (!picker.getParent()) {
-                Ext.Viewport.add(picker);
-            }
-            picker.show();
-        } else {
-            var listPanel = me.getTabletPicker(),
-                list = listPanel.down('list'),
-                index, records,
-                value = me.getValue();
-
-            if (!listPanel.getParent()) {
-                Ext.Viewport.add(listPanel);
-            }
-
-            if(value){
-                records = me.getRecordsFromValue(value);
-                list.select(records, null, true);
-            }else{
-                list.deselectAll();
-            }
-
-            listPanel.showBy(me.getComponent(), (Ext.os.is.BlackBerry && Ext.os.version.getMajor() === 10) ? 't-b' : null);
+        if (!listPanel.getParent()) {
+            Ext.Viewport.add(listPanel);
         }
+
+        if(value){
+            records = me.getRecordsFromValue(value);
+            list.select(records, null, true);
+        }else{
+            list.deselectAll();
+        }
+
+        listPanel.showBy(me.getComponent(), (Ext.os.is.BlackBerry && Ext.os.version.getMajor() === 10) ? 't-b' : null);
     },
     /**
      * Called when the internal {@link #store}'s data has changed.
@@ -260,5 +248,5 @@ Ext.define('Ux.field.Multiselect', {
                 }
             }
         }
-    },
+    }
 });
