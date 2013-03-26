@@ -3,7 +3,7 @@ Ux.field.Multiselect
 
 Multiselect field for Sencha Touch 2.1.
 
-As I didn't like available extensions, I've extended Ext.field.Select widget and added the multiselect feature.  Works as a single or multi select field. So far only for tablets screens. 
+As I didn't like available extensions, I've extended Ext.field.Select widget and added the multiselect feature.  Works as a single or multi select field.
 
 It can easily extend Ext.field.Text if to take the missing code from Ext.field.Select and add it to Ux.field.Multiselect.
 
@@ -19,8 +19,10 @@ Ext.create('Ext.form.Panel', {
                 {
                     xtype: 'selectfield',
                     label: 'Choose one',
-                    delimiter: '/', //default is ','
-                    mode: 'SINGLE', // default is MULTI
+                    delimiter: ',', 
+                    mode: 'SINGLE', // default is MULTI,
+                    // value: ['first','second'] , init value with an array
+                    // value: 'first,second', init value with a string
                     options: [
                         {text: 'First Option',  value: 'first'},
                         {text: 'Second Option', value: 'second'},
@@ -32,3 +34,6 @@ Ext.create('Ext.form.Panel', {
     ]
 });
 ```
+usePicker config won't work as it is always used a list on both tablets and phones
+
+
