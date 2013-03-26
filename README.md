@@ -37,5 +37,5 @@ Ext.create('Ext.form.Panel', {
 usePicker config won't work as it is always used a list on both tablets and phones
 
 
-![Multiselect field](https://github.com/vadimpopa/Ux.field.Multiselect/screenshot.png)
+![Multiselect field](screenshot.png)
  
