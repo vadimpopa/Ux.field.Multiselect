@@ -17,7 +17,7 @@ Ext.create('Ext.form.Panel', {
             title: 'Select',
             items: [
                 {
-                    xtype: 'selectfield',
+                    xtype: 'multiselectfield',
                     label: 'Choose one',
                     delimiter: ',', 
                     mode: 'SINGLE', // default is MULTI,
