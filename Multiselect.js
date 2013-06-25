@@ -4,8 +4,45 @@ Ext.define('Ux.field.Multiselect', {
 
     config: {
         delimiter: ',',
-        mode: 'MULTI'
+
+        mode: 'MULTI',
+
+        doneButton: true
     },
+    /**
+     * Updates the {@link #doneButton} configuration. Will change it into a button when appropriate, or just update the text if needed.
+     * @param {Object} config
+     * @return {Object}
+     */
+    applyDoneButton: function(config) {
+        if (config) {
+            if (Ext.isBoolean(config)) {
+                config = {};
+            }
+
+            if (typeof config == "string") {
+                config = {
+                    text: config
+                };
+            }
+
+            Ext.applyIf(config, {
+                text: 'Done',
+                ui: 'action',
+                height: '20px',
+                margin: '5px auto 0px auto',
+                width: '50%',
+                docked: 'bottom',
+                listeners: {
+                    tap: this.onButtonTap,
+                    scope: this
+                }
+            });
+        }
+
+        return Ext.factory(config, 'Ext.Button', this.getDoneButton());
+    },
+
     /**
      * @private
      */
@@ -35,19 +72,7 @@ Ext.define('Ux.field.Multiselect', {
             if(listMode === 'SINGLE'){
                 me.listPanel.down('list').on('itemtap',me.onListTap,me);
             }else{
-                me.listPanel.add({
-                    xtype: 'button',
-                    text: 'Done',
-                    ui: 'action',
-                    height: '20px',
-                    margin: '5px auto 0px auto',
-                    width: '50%',
-                    docked: 'bottom',
-                    listeners: {
-                        tap: me.onButtonTap,
-                        scope: me
-                    }
-                });    
+                me.listPanel.add(this.getDoneButton());    
             }
         }
         return me.listPanel;
@@ -79,10 +104,10 @@ Ext.define('Ux.field.Multiselect', {
      */
     updateValue: function(newValue, oldValue) {
         var me = this,
-            value = me.convertValue(newValue,me.getValueField(),me.getDisplayField()),
-            value = value.join(me.getDelimiter());
-
-        me.superclass.superclass.updateValue.call(me,[value]);
+            value = me.convertValue(newValue,me.getValueField(),me.getDisplayField());
+            
+      value = value.join(me.getDelimiter());
+      me.superclass.superclass.updateValue.call(me,[value]);
     },
     /**
      * @private
