@@ -68,8 +68,7 @@
      */
     "css": [
         {
-            "path": "resources/css/app.css",
-            "update": "delta"
+            "path": "http://cdn.sencha.io/touch/sencha-touch-2.2.0/resources/css/sencha-touch.css"
         }
     ],
 
