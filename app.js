@@ -15,7 +15,7 @@
 
 //<debug>
 Ext.Loader.setPath({
-    'Ux': 'ux'
+    'Ux.field': 'ux'
 });
  Ext.Loader.setConfig({ disableCaching: false });
 //</debug>
