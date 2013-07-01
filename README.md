@@ -36,4 +36,8 @@ Ext.create('Ext.form.Panel', {
 ```
 
 ![Multiselect field](screenshot.png)
+
+DEMO: https://rawgithub.com/vadimpopa/Ux.field.Multiselect/master/index.html
+
+p.s For chrome users when testing, in the address bar at the right end should be a 'shield' icon, you can click on that to run insecure content. Those scripts are from http://cdn.sencha.io/touch/sencha-touch-2.2.0, don't worry it's safe.
  

@@ -40,7 +40,7 @@ Ext.application({
                             xtype: 'multiselectfield',
                             label: 'Choose one',
                             delimiter: ',', 
-                            mode: 'SINGLE', // default is MULTI,
+                            mode: 'MULTI', // default is MULTI,
                             // value: ['first','second'] , init value with an array
                             // value: 'first,second', init value with a string
                             options: [
