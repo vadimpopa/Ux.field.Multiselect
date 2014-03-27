@@ -7,7 +7,9 @@ Ext.define('Ux.field.Multiselect', {
 
         mode: 'MULTI',
 
-        doneButton: true
+        doneButton: true,
+
+        cancelButton: true,
     },
     /**
      * Updates the {@link #doneButton} configuration. Will change it into a button when appropriate, or just update the text if needed.
@@ -30,11 +32,9 @@ Ext.define('Ux.field.Multiselect', {
                 text: 'Done',
                 ui: 'action',
                 height: '20px',
-                margin: '5px auto 0px auto',
-                width: '50%',
-                docked: 'bottom',
+                width: '40%',
                 listeners: {
-                    tap: this.onButtonTap,
+                    tap: this.onDoneButtonTap,
                     scope: this
                 }
             });
@@ -42,6 +42,33 @@ Ext.define('Ux.field.Multiselect', {
 
         return Ext.factory(config, 'Ext.Button', this.getDoneButton());
     },
+
+    applyCancelButton: function(config) {
+        if (config) {
+            if (Ext.isBoolean(config)) {
+                config = {};
+            }
+
+            if (typeof config == "string") {
+                config = {
+                    text: config
+                };
+            }
+
+            Ext.applyIf(config, {
+                text: 'Clear',
+                ui: 'action',
+                height: '20px',
+                width: '40%',
+                listeners: {
+                    tap: this.onCancelButtonTap,
+                    scope: this
+                }
+            });
+        }
+
+        return Ext.factory(config, 'Ext.Button', this.getCancelButton());
+    },    
 
     /**
      * @private
@@ -66,13 +93,23 @@ Ext.define('Ux.field.Multiselect', {
                     mode: listMode,
                     store: me.getStore(),
                     itemTpl: '<span class="x-list-label">{' + me.getDisplayField() + ':htmlEncode}</span>'
+                },{
+                    xtype: 'toolbar',
+                    docked: 'bottom',
+                    layout: {
+                        pack: 'center',
+                        type: 'hbox'
+                    }
                 }]
             }, config));
 
             if(listMode === 'SINGLE'){
                 me.listPanel.down('list').on('itemtap',me.onListTap,me);
             }else{
-                me.listPanel.add(this.getDoneButton());    
+                me.listPanel.down('toolbar').add(this.getCancelButton());   
+                console.log('toolbar');
+                test = me.listPanel.down('toolbar');
+                me.listPanel.down('toolbar').add(this.getDoneButton());    
             }
         }
         return me.listPanel;
@@ -87,11 +124,19 @@ Ext.define('Ux.field.Multiselect', {
     /**
      * @private
      */
-    onButtonTap: function(){
+    onDoneButtonTap: function(){
         var records = this.listPanel.down('list').getSelection();
         this.setValue(records);
         this.superclass.onListTap.call(this);
     },
+    /**
+     * @private
+     */
+    onCancelButtonTap: function(){
+        this.listPanel.down('list').deselectAll();
+        this.setValue(null);
+        this.superclass.onListTap.call(this);
+    },    
     /**
      * @private
      */
@@ -119,7 +164,6 @@ Ext.define('Ux.field.Multiselect', {
             out = [],
             len,
             item;
-            
         if (value) {
             if (delimiter && Ext.isString(value)) {
                 value = value.split(delimiter);
@@ -146,7 +190,6 @@ Ext.define('Ux.field.Multiselect', {
             out = [],
             len,
             item;
-            
         if (value) {
             if (delimiter && Ext.isString(value)) {
                 value = value.split(delimiter);
