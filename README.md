@@ -37,7 +37,5 @@ Ext.create('Ext.form.Panel', {
 
 ![Multiselect field](screenshot.png)
 
-![Multiselect field](screenshot1.png)
-
 DEMO: https://fiddle.sencha.com/#fiddle/r9
  
