@@ -107,8 +107,6 @@ Ext.define('Ux.field.Multiselect', {
                 me.listPanel.down('list').on('itemtap',me.onListTap,me);
             }else{
                 me.listPanel.down('toolbar').add(this.getCancelButton());   
-                console.log('toolbar');
-                test = me.listPanel.down('toolbar');
                 me.listPanel.down('toolbar').add(this.getDoneButton());    
             }
         }
