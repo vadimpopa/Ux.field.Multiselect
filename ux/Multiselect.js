@@ -9,7 +9,7 @@ Ext.define('Ux.field.Multiselect', {
 
         doneButton: true,
 
-        cancelButton: true,
+        clearButton: false
     },
     /**
      * Updates the {@link #doneButton} configuration. Will change it into a button when appropriate, or just update the text if needed.
@@ -43,7 +43,7 @@ Ext.define('Ux.field.Multiselect', {
         return Ext.factory(config, 'Ext.Button', this.getDoneButton());
     },
 
-    applyCancelButton: function(config) {
+    applyClearButton: function(config) {
         if (config) {
             if (Ext.isBoolean(config)) {
                 config = {};
@@ -61,13 +61,13 @@ Ext.define('Ux.field.Multiselect', {
                 height: '20px',
                 width: '40%',
                 listeners: {
-                    tap: this.onCancelButtonTap,
+                    tap: this.onClearButtonTap,
                     scope: this
                 }
             });
         }
 
-        return Ext.factory(config, 'Ext.Button', this.getCancelButton());
+        return Ext.factory(config, 'Ext.Button', this.getClearButton());
     },    
 
     /**
@@ -76,7 +76,8 @@ Ext.define('Ux.field.Multiselect', {
     getTabletPicker: function() {
         var me = this,
             config = me.getDefaultTabletPickerConfig(),
-            listMode = me.getMode();
+            listMode = me.getMode(),
+            toolbar;
 
         if (!me.listPanel) {
             me.listPanel = Ext.create('Ext.Panel', Ext.apply({
@@ -106,8 +107,13 @@ Ext.define('Ux.field.Multiselect', {
             if(listMode === 'SINGLE'){
                 me.listPanel.down('list').on('itemtap',me.onListTap,me);
             }else{
-                me.listPanel.down('toolbar').add(this.getCancelButton());   
-                me.listPanel.down('toolbar').add(this.getDoneButton());    
+                toolbar = me.listPanel.down('toolbar');
+                config = this.getClearButton();
+
+                if(config) {
+                    toolbar.add(config);   
+                }
+                toolbar.add(this.getDoneButton());    
             }
         }
         return me.listPanel;
@@ -130,7 +136,7 @@ Ext.define('Ux.field.Multiselect', {
     /**
      * @private
      */
-    onCancelButtonTap: function(){
+    onClearButtonTap: function(){
         this.listPanel.down('list').deselectAll();
         this.setValue(null);
         this.superclass.onListTap.call(this);
