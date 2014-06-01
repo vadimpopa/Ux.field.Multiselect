@@ -1,7 +1,7 @@
 Ux.field.Multiselect
 ====================
 
-Multiselect field for Sencha Touch 2.1/2.2 Works as a single or multi select field.
+Multiselect field for Sencha Touch 2.1/2.2/2.3 Works as a single or multi select field.
 
 It can easily extend Ext.field.Text if to take the missing code from Ext.field.Select and add it to Ux.field.Multiselect.
 
