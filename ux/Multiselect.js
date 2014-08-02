@@ -44,29 +44,18 @@ Ext.define('Ux.field.Multiselect', {
     },
 
     applyClearButton: function(config) {
-        if (config) {
-            if (Ext.isBoolean(config)) {
-                config = {};
+        // ignore passed config
+        config = {
+            text: 'Select All',
+            ui: 'action',
+            height: '20px',
+            width: '40%',
+            listeners: {
+                tap: this.onClearButtonTap,
+                scope: this
             }
-
-            if (typeof config == "string") {
-                config = {
-                    text: config
-                };
-            }
-
-            Ext.applyIf(config, {
-                text: 'Clear',
-                ui: 'action',
-                height: '20px',
-                width: '40%',
-                listeners: {
-                    tap: this.onClearButtonTap,
-                    scope: this
-                }
-            });
-        }
-
+        };
+        
         return Ext.factory(config, 'Ext.Button', this.getClearButton());
     },    
 
@@ -104,9 +93,9 @@ Ext.define('Ux.field.Multiselect', {
                 }]
             }, config));
 
-            if(listMode === 'SINGLE'){
-                me.listPanel.down('list').on('itemtap',me.onListTap,me);
-            }else{
+            me.listPanel.down('list').on('itemtap',me.onListTap,me);
+            
+            if(listMode === 'MULTI'){
                 toolbar = me.listPanel.down('toolbar');
                 config = this.getClearButton();
 
@@ -122,13 +111,22 @@ Ext.define('Ux.field.Multiselect', {
      * @private
      */
     onListTap : function(list,index,target,record) {
-        this.setValue(record);
-        this.callParent();
+        if (this.getMode() === 'SINGLE') {
+            this.setValue(record);
+            this.callParent();
+        }
+        if (this.getClearButton()) {
+            if (this.listPanel.down('list').getSelectionCount() === this.getStore().getData().length) {
+                this.getClearButton().setText('Select None');
+            } else {
+                this.getClearButton().setText('Select All');
+            }
+        }
     },
     /**
      * @private
      */
-    onDoneButtonTap: function(){
+    onDoneButtonTap: function() {
         var records = this.listPanel.down('list').getSelection();
         this.setValue(records);
         this.superclass.onListTap.call(this);
@@ -136,10 +134,15 @@ Ext.define('Ux.field.Multiselect', {
     /**
      * @private
      */
-    onClearButtonTap: function(){
-        this.listPanel.down('list').deselectAll();
-        this.setValue(null);
-        this.superclass.onListTap.call(this);
+    onClearButtonTap: function() {
+        var num_of_options = this.getStore().getData().length;
+        if (this.listPanel.down('list').getSelectionCount() !== num_of_options) {
+            this.listPanel.down('list').selectAll();
+            this.getClearButton().setText('Select None');
+        } else {
+            this.listPanel.down('list').deselectAll();
+            this.getClearButton().setText('Select All');
+        }
     },    
     /**
      * @private
@@ -259,6 +262,14 @@ Ext.define('Ux.field.Multiselect', {
             old = me.convertValue(oldValue,me.getDisplayField(),me.getValueField());
 
         me.fireEvent('change', me, me.getValue(), old);
+
+        if (this.getClearButton()) {
+            if (this.getValue().length === this.getStore().getData().length) {
+                this.getClearButton().setText('Select None');
+            } else {
+                this.getClearButton().setText('Select All');
+            }
+        }
     },
     /**
      * Shows the picker for the select field, whether that is a {@link Ext.picker.Picker} or a simple
@@ -293,6 +304,14 @@ Ext.define('Ux.field.Multiselect', {
             list.select(records, null, true);
         }else{
             list.deselectAll();
+        }
+
+        if (this.getClearButton()) {
+            if (this.getValue().length === this.getStore().getData().length) {
+                this.getClearButton().setText('Select None');
+            } else {
+                this.getClearButton().setText('Select All');
+            }
         }
 
         listPanel.showBy(me.getComponent(), (Ext.os.is.BlackBerry && Ext.os.version.getMajor() === 10) ? 't-b' : null);
