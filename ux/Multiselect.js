@@ -9,7 +9,7 @@ Ext.define('Ux.field.Multiselect', {
 
         doneButton: true,
 
-        clearButton: true
+        clearButton: false
     },
     /**
      * Updates the {@link #doneButton} configuration. Will change it into a button when appropriate, or just update the text if needed.
