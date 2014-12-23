@@ -11,6 +11,7 @@ Ext.define('Ux.field.Multiselect', {
 
         clearButton: false
     },
+
     /**
      * Updates the {@link #doneButton} configuration. Will change it into a button when appropriate, or just update the text if needed.
      * @param {Object} config
@@ -118,6 +119,7 @@ Ext.define('Ux.field.Multiselect', {
         }
         return me.listPanel;
     },
+
     /**
      * @private
      */
@@ -125,6 +127,7 @@ Ext.define('Ux.field.Multiselect', {
         this.setValue(record);
         this.callParent();
     },
+
     /**
      * @private
      */
@@ -133,6 +136,7 @@ Ext.define('Ux.field.Multiselect', {
         this.setValue(records);
         this.superclass.onListTap.call(this);
     },
+
     /**
      * @private
      */
@@ -140,7 +144,8 @@ Ext.define('Ux.field.Multiselect', {
         this.listPanel.down('list').deselectAll();
         this.setValue(null);
         this.superclass.onListTap.call(this);
-    },    
+    }, 
+
     /**
      * @private
      */
@@ -148,6 +153,7 @@ Ext.define('Ux.field.Multiselect', {
         this.getOptions();
         return  this.getValueFromRecords(value,this.getValueField());
     },
+
     /**
      * @private
      */
@@ -158,6 +164,7 @@ Ext.define('Ux.field.Multiselect', {
       value = value.join(me.getDelimiter());
       me.superclass.superclass.updateValue.call(me,[value]);
     },
+
     /**
      * @private
      */
@@ -183,6 +190,7 @@ Ext.define('Ux.field.Multiselect', {
         }
         return out;
     },
+
     /**
      * @private
      * Returns the value in array form from records
@@ -211,6 +219,7 @@ Ext.define('Ux.field.Multiselect', {
         }
         return out.length > 0 ? out : value;
     },
+
     /**
      * @private
      */
@@ -237,6 +246,7 @@ Ext.define('Ux.field.Multiselect', {
         }
         return records;
     },
+
     /**
      * Returns the current selected {@link Ext.data.Model records} instances selected in this field.
      * @return {Ext.data.Model[]} An array of Records.
@@ -244,6 +254,7 @@ Ext.define('Ux.field.Multiselect', {
     getSelection: function() {
         return this.listPanel.down('list').getSelection();
     },
+
     /**
      * Returns the current selected records as an array of their valueFields.
      * @return {Array} An array of valueFields
@@ -251,6 +262,7 @@ Ext.define('Ux.field.Multiselect', {
     getValue: function() {
         return this._value;
     },
+
     /**
      * @private
      */
@@ -260,6 +272,7 @@ Ext.define('Ux.field.Multiselect', {
 
         me.fireEvent('change', me, me.getValue(), old);
     },
+
     /**
      * Shows the picker for the select field, whether that is a {@link Ext.picker.Picker} or a simple
      * {@link Ext.List list}.
@@ -297,6 +310,7 @@ Ext.define('Ux.field.Multiselect', {
 
         listPanel.showBy(me.getComponent(), (Ext.os.is.BlackBerry && Ext.os.version.getMajor() === 10) ? 't-b' : null);
     },
+    
     /**
      * Called when the internal {@link #store}'s data has changed.
      */

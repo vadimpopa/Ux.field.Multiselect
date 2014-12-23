@@ -1,0 +1,38 @@
+{
+    "name": "Multiselect",
+    "type": "code",
+    "creator": "Vadim Popa",
+    "summary": "Multiselect field for Sencha Touch 2.x",
+    "detailedDescription": "Multiselect field for Sencha Touch 2.x. Works as a single or multi select field",
+    "version": "1.0.0",
+    "compatVersion": "1.0.0",
+    "format": "1",
+    "slicer": {
+        "js": [
+            {
+                "path": "${package.dir}/sass/example/custom.js",
+                "isWidgetManifest": true
+            }
+        ]
+    },
+    "output": "${package.dir}/build",
+    "architect": {
+        "compatFrameworks": [
+            "touch20",
+            "touch21",
+            "touch22",
+            "touch23",
+            "touch24"
+        ],
+        "requires": [
+        ],
+        "classes": [{
+            "definition": "Multiselect.Definition.js",
+            "className": "Ux.field.Multiselect",
+            "js": ["Multiselect.js"],
+            "css": []
+        }]
+    },
+    "local": true,
+    "requires": []
+}
