@@ -162,6 +162,8 @@ Ext.define('Ux.field.Multiselect', {
             value = me.convertValue(newValue,me.getValueField(),me.getDisplayField());
             
       value = value.join(me.getDelimiter());
+      
+      //If the component is extended then is needed to call one more superClass
       me.superclass.superclass.updateValue.call(me,[value]);
     },
 
