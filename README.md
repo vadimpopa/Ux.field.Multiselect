@@ -40,4 +40,7 @@ Ext.create('Ext.form.Panel', {
 ![Multiselect field](screenshot.png)
 
 DEMO: https://fiddle.sencha.com/#fiddle/r9
+
+NOTE: If you extend this component make sure to check this:
+https://github.com/vadimpopa/Ux.field.Multiselect/pull/7#issuecomment-115697340
  
