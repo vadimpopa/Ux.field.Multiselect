@@ -185,7 +185,7 @@ Ext.define('Ux.field.Multiselect', {
             }
 
             for (len = value.length; i < len; ++i) {
-                item = store.findRecord(fieldIn,value[i]);
+                item = store.findRecord(fieldIn,value[i],0,false,true,true);
                 if(item)
                     out.push(item.get(fieldOut));
             }
