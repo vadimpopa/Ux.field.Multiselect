@@ -43,6 +43,29 @@ Ext.define('Ux.field.Multiselect', {
 
         return Ext.factory(config, 'Ext.Button', this.getDoneButton());
     },
+	
+	/**
+     * Override destroy to make sure all components are cleaned up on destroy
+     */
+    destroy: function(){
+	    if(this.getDoneButton()){
+	        this.getDoneButton().destroy();
+	    }
+    
+	    if(this.getClearButton()){
+	        this.getClearButton().destroy();
+	    }
+    
+	    if(this.getClearButton()){
+	        this.getClearButton().destroy();
+	    }
+    
+	    if(this.listPanel){
+	        this.listPanel.destroy();
+	    }
+    
+	    this.callParent(arguments);
+	},
 
     applyClearButton: function(config) {
         if (config) {
