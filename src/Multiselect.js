@@ -185,7 +185,7 @@ Ext.define('Ux.field.Multiselect', {
             value = me.convertValue(newValue,me.getValueField(),me.getDisplayField());
             
       value = value.join(me.getDelimiter());
-      me.superclass.superclass.superclass.updateValue.call(me,[value]);
+      me.superclass.superclass.updateValue.call(me,[value]);
     },
 
     /**
